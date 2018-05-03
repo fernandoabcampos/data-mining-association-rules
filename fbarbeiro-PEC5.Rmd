@@ -1,0 +1,45 @@
+---
+title: "PEC 5 - Reglas de Asociación"
+author: "Fernando Antonio Barbeiro Campos - fbarbeiro@uoc.edu"
+
+date: '`r format(Sys.Date(),"%e de %B, %Y")`'
+output:
+  word_document:
+    toc: yes
+---
+ 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load_libraries, include=FALSE}
+library(knitr)
+#\usepackage{mathtools}
+```
+
+```{r chunck1}
+
+```
+
+```{r chunck2}
+
+```
+
+```{r chunck3}
+
+```
+
+
+```{r chunck4}
+
+```
+
+```{r chunck5}
+
+```
+
+
+```{r chunck6}
+
+```
+

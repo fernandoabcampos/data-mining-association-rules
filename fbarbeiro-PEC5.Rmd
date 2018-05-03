@@ -27,6 +27,10 @@ class(tdata)
 inspect(head(tdata))
 size(head(tdata)) 
 
+frequentItems <- eclat (tdata, parameter = list(supp = 0.07, maxlen = 15))
+inspect(frequentItems)
+itemFrequencyPlot(tdata, topN=15, type="absolute", main="Item Frequency") 
+
 ```
 
 ```{r chunck2}

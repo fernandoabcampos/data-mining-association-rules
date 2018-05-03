@@ -1,61 +1,19 @@
----
-title: "PEC 5 - Reglas de Asociación"
-author: "Fernando Antonio Barbeiro Campos - fbarbeiro@uoc.edu"
-
-date: '`r format(Sys.Date(),"%e de %B, %Y")`'
-output:
-  word_document:
-    toc: yes
----
- 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{r load_libraries, include=FALSE}
-library(knitr)
 library(arules)
-#\usepackage{mathtools}
-```
-
-```{r chunck1}
 my_file <- "lastfm.csv"
+?read.transactions
 cat("\n", file = my_file, append = TRUE)
 tdata <- read.transactions(file = my_file, rm.duplicates = FALSE, skip = 1, sep = ",")
 head(tdata)
 class(tdata)
 inspect(head(tdata))
-size(head(tdata)) 
 
 frequentItems <- eclat (tdata, parameter = list(supp = 0.07, maxlen = 15))
 inspect(frequentItems)
 itemFrequencyPlot(tdata, topN=15, type="absolute", main="Item Frequency") 
 
-```
 
-```{r chunck2}
 rules <- apriori (tdata, parameter = list(supp = 0.001, conf = 0.5))
 rules_conf <- sort (rules, by="confidence", decreasing=TRUE)
 inspect(head(rules_conf))
 rules_lift <- sort (rules, by="lift", decreasing=TRUE) 
 inspect(head(rules_lift))
-```
-
-```{r chunck3}
-
-```
-
-
-```{r chunck4}
-
-```
-
-```{r chunck5}
-
-```
-
-
-```{r chunck6}
-
-```
-

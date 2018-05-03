@@ -14,10 +14,18 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r load_libraries, include=FALSE}
 library(knitr)
+library(arules)
 #\usepackage{mathtools}
 ```
 
 ```{r chunck1}
+my_file <- "lastfm.csv"
+cat("\n", file = my_file, append = TRUE)
+tdata <- read.transactions(file = my_file, rm.duplicates = TRUE, skip = 1)
+head(tdata)
+class(tdata)
+inspect(head(tdata))
+size(head(tdata)) 
 
 ```
 

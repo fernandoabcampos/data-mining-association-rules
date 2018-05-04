@@ -17,3 +17,12 @@ rules_conf <- sort (rules, by="confidence", decreasing=TRUE)
 inspect(head(rules_conf))
 rules_lift <- sort (rules, by="lift", decreasing=TRUE) 
 inspect(head(rules_lift))
+
+
+#Suggestion
+### Queremos una lista por cada usuario de los grupos que escucha. Eliminan sexo y país
+#mba <- split (x = fichero_leido (, “artist”], f = lastfm$user))
+### Si hay duplicados los eliminamos
+#mba <- laaply (mba, unique)
+## y ahora binarizamos los datos
+#mba <- as (mba, “transactions”)

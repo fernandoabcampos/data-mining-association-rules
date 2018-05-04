@@ -3,9 +3,7 @@ title: "PEC 5 - Reglas de Asociación"
 author: "Fernando Antonio Barbeiro Campos - fbarbeiro@uoc.edu"
 
 date: '`r format(Sys.Date(),"%e de %B, %Y")`'
-output:
-  word_document:
-    toc: yes
+output: pdf_document
 ---
  
 ```{r setup, include=FALSE}
@@ -18,27 +16,75 @@ library(arules)
 #\usepackage{mathtools}
 ```
 
-```{r chunck1}
-my_file <- "lastfm.csv"
-cat("\n", file = my_file, append = TRUE)
-tdata <- read.transactions(file = my_file, rm.duplicates = FALSE, skip = 1, sep = ",")
-head(tdata)
-class(tdata)
-inspect(head(tdata))
-size(head(tdata)) 
+# Presentación
+Esta práctica cubre los Módulos 6 y 8 (Evaluación de modelos) del programa de la asignatura.
 
-frequentItems <- eclat (tdata, parameter = list(supp = 0.07, maxlen = 15))
-inspect(frequentItems)
-itemFrequencyPlot(tdata, topN=15, type="absolute", main="Item Frequency") 
+# Competencias
+Las competencias que se trabajan en esta prueba son:
+<div style="text-align: justify">
+* Uso y aplicación de las TIC en el ámbito académico y profesional.
+
+* Capacidad para innovar y generar nuevas ideas.
+
+* Capacidad para evaluar soluciones tecnológicas y elaborar propuestas de proyectos teniendo en cuenta los recursos, las alternativas disponibles y las condiciones de mercado.
+
+* Conocer las tecnologías de comunicaciones actuales y emergentes, así como saberlas aplicar convenientemente para diseñar y desarrollar soluciones basadas en sistemas y tecnologías de la información.
+
+* Aplicación de las técnicas específicas de ingeniería del software en las diferentes etapas del ciclo de vida de un proyecto.
+
+* Capacidad para aplicar las técnicas específicas de tratamiento, almacenamiento y administración de datos.
+
+* Capacidad para proponer y evaluar diferentes alternativas tecnológicas para resolver un problema concreto.
+</div>
+
+
+# Objetivos
+<p style="text-align: justify">
+La correcta asimilación del Módulo 6 y el resto de Módulos trabajados: En esta PEC trabajaremos la generación e interpretación de un modelo de basado en reglas de asociación con los recursos de prácticas.
+</p>
+
+# Enunciado
+<p style="text-align: justify">
+Contextualizad los ejemplos de las siguientes preguntas respecto al proyecto que has definido en la PEC1. Si lo deseáis, podéis redefinir o afinar el proyecto.
+</p>
+
+
+1. ¿creéis que las reglas de asociación podrían ser el método finalmente escogido? ¿Os podrían aportar alguna cosa? 
+    + ¿Cómo podría ser el modelo resultante?
+    + Dar un ejemplo de la interpretación que se podría derivar del modelo generado
+    
+## Respuesta
+<p style="text-align: justify">
+Así como ya había Absolutamente los métodos de agregación no son los más adecuados para elegir en el caso de baggage-propensity. La justificativa es que, conforme hemos comentado en la PEC3, tratase de un modelo de aprendizaje supervisado, esto es, conocemos a priori las categorías (labels). Mientras tanto, modelos de agregación (que dan como resultado modelos descriptivos) buscan obtener una primera aproximación con relación al dominio de la información, o sea, son modelos de aprendizaje no supervisados.
+</p>
+
+
+
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+```{r chunck1}
+#my_file <- "lastfm.csv"
+#cat("\n", file = my_file, append = TRUE)
+#tdata <- read.transactions(file = my_file, rm.duplicates = FALSE, skip = 1, sep = ",")
+#head(tdata)
+#class(tdata)
+#inspect(head(tdata))
+#size(head(tdata)) 
+
+#frequentItems <- eclat (tdata, parameter = list(supp = 0.07, maxlen = 15))
+#inspect(frequentItems)
+#itemFrequencyPlot(tdata, topN=15, type="absolute", main="Item Frequency") 
 
 ```
 
 ```{r chunck2}
-rules <- apriori (tdata, parameter = list(supp = 0.001, conf = 0.5))
-rules_conf <- sort (rules, by="confidence", decreasing=TRUE)
-inspect(head(rules_conf))
-rules_lift <- sort (rules, by="lift", decreasing=TRUE) 
-inspect(head(rules_lift))
+#rules <- apriori (tdata, parameter = list(supp = 0.001, conf = 0.5))
+#rules_conf <- sort (rules, by="confidence", decreasing=TRUE)
+#inspect(head(rules_conf))
+#rules_lift <- sort (rules, by="lift", decreasing=TRUE) 
+#inspect(head(rules_lift))
 ```
 
 ```{r chunck3}

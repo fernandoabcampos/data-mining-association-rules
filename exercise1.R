@@ -11,7 +11,8 @@ frequentItems <- eclat (tdata, parameter = list(supp = 0.07, maxlen = 15))
 inspect(frequentItems)
 itemFrequencyPlot(tdata, topN=15, type="absolute", main="Item Frequency") 
 
-
+?apriori
+apriori(mba)
 rules <- apriori (tdata, parameter = list(supp = 0.001, conf = 0.5))
 rules_conf <- sort (rules, by="confidence", decreasing=TRUE)
 inspect(head(rules_conf))

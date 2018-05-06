@@ -3,7 +3,7 @@ title: "PEC 5 - Reglas de Asociación"
 author: "Fernando Antonio Barbeiro Campos - fbarbeiro@uoc.edu"
 
 date: '`r format(Sys.Date(),"%e de %B, %Y")`'
-output: pdf_document
+output: html_document
 ---
  
 ```{r setup, include=FALSE}
@@ -77,31 +77,147 @@ Content Cell  | Content Cell
 #inspect(frequentItems)
 #itemFrequencyPlot(tdata, topN=15, type="absolute", main="Item Frequency") 
 
-```
-
-```{r chunck2}
 #rules <- apriori (tdata, parameter = list(supp = 0.001, conf = 0.5))
 #rules_conf <- sort (rules, by="confidence", decreasing=TRUE)
 #inspect(head(rules_conf))
 #rules_lift <- sort (rules, by="lift", decreasing=TRUE) 
 #inspect(head(rules_lift))
+
+
+```
+
+```{r chunck2}
+library(knitr)
+
+lastfm <- read.csv(file = "lastfm.csv")
+head(lastfm)
+summary(lastfm)
+nrow(lastfm)
+ncol(lastfm)
+str(lastfm)
+res <- sapply(lastfm, class)
+kable(data.frame(variables=names(res),clase=as.vector(res)))
+unlist(lapply(lastfm, function(x) any(is.na(x))))
+#Distribucion de valores
+head(table(lastfm$artist))
+
+head(table(lastfm$user))
+
+dist_sex <- table(lastfm$sex)
+head(table(lastfm$country))
+
+
+library (plotrix)
+
+lbls <- paste(names(dist_sex),  "\n" , dist_sex, sep= "" ) 
+pie3D(dist_sex
+       , radius= 0.9
+       , labelcex=  0.8
+       , labels = lbls
+       , explode= 0.1
+       , main= "Distribución por Sexo" , col = rainbow(length(lbls)
+       ))
 ```
 
 ```{r chunck3}
+qtt_users <- aggregate(data.frame(count = lastfm$user), 
+               by = list(value = lastfm$user), 
+               FUN = length)
+#Numero de usuarios
+nrow(qtt_users)
+head(qtt_users[order(qtt_users$count,  decreasing = TRUE), ])
+
+
+
+qtt_artists <- aggregate(data.frame(count = lastfm$artist), list(value = lastfm$artist), length)
+#¿Cuantos grupos musicales hay? 
+nrow(qtt_artists)
+head(qtt_artists[order(qtt_artists$count,  decreasing = TRUE), ])
 
 ```
 
 
 ```{r chunck4}
 
+#colnames(lastfm)
+#drops <- c("sex","country")
+#lastfm <- lastfm[ , !(names(lastfm) %in% drops)]
+#class(lastfm)
+#str(lastfm)
+
+#nrow(lastfm)
+
+#my_duplicated_list <- lastfm[duplicated(lastfm),]
+#my_duplicated_list
+#nrow(my_duplicated_list)
+
+#not_duplicated <- lastfm[!duplicated(lastfm), ]
+#nrow(not_duplicated)
+
+#otra aproximacao
+#unicos <- unique(lastfm)
+#nrow(unicos)
+
+#Binarizando
+#t_lastfm <- as (not_duplicated, "transactions")
+#head(t_lastfm)
+
 ```
 
 ```{r chunck5}
-
+lastfm <- read.csv(file = "lastfm.csv")
+mba <- split (x = lastfm [, "artist"], f = lastfm$user)
+mba <- lapply (mba, unique)
+mba <- as (mba, "transactions")
+class(mba)
+head(mba)
 ```
 
 
 ```{r chunck6}
+apriori(mba)
+apriori(mba, parameter=list(support=0.01, confidence=0.5))
 
+my_file <- "lastfm.csv"
+#Habia un warning de end of line, por esto el cat
+cat("\n", file = my_file, append = TRUE)
+tdata <- read.transactions(file = my_file, rm.duplicates = TRUE, skip = 1, sep = ",")
+head(tdata)
+class(tdata)
+inspect(head(tdata))
+
+
+apriori(mba)
+apriori(mba, parameter=list(support=0.01, confidence=0.5))
+apriori(tdata)
+apriori(tdata, parameter=list(support=0.01, confidence=0.5))
+
+
+summary(mba)
+summary(tdata)
+frequent_items_tdata <- eclat (tdata, parameter = list(supp = 0.07, maxlen = 15))
+inspect(frequent_items_tdata)
+itemFrequencyPlot(tdata, topN=15, type="absolute", main="Item Frequency") 
+
+frequent_items_mba <- eclat (mba, parameter = list(supp = 0.07, maxlen = 15))
+inspect(frequent_items_mba)
+itemFrequencyPlot(mba, topN=15, type="absolute", main="Item Frequency") 
+
+rules_mba <- apriori(mba, parameter=list(support=0.015, confidence=0.5, ext=TRUE))
+rules_tdata <- apriori(tdata, parameter=list(support=0.015, confidence=0.5))
+
+items(rules_mba)
+items(rules_tdata)
+
+inspect(rules_mba)
+inspect(rules_tdata)
+
+
+rules_conf <- sort (rules_mba, by="confidence", decreasing=TRUE)
+inspect(rules_conf)
+rules_lift <- sort (rules_mba, by="lift", decreasing=TRUE) 
+inspect(rules_lift)
+
+inspect(rules_tdata)
 ```
 

@@ -1,0 +1,299 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={PEC 5 - Reglas de Asociación},
+            pdfauthor={Fernando Antonio Barbeiro Campos - fbarbeiro@uoc.edu},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{PEC 5 - Reglas de Asociación}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Fernando Antonio Barbeiro Campos -
+\href{mailto:fbarbeiro@uoc.edu}{\nolinkurl{fbarbeiro@uoc.edu}}}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{5 de May, 2018}
+
+
+\begin{document}
+\maketitle
+
+\section{Presentación}\label{presentacion}
+
+Esta práctica cubre los Módulos 6 y 8 (Evaluación de modelos) del
+programa de la asignatura.
+
+\section{Competencias}\label{competencias}
+
+Las competencias que se trabajan en esta prueba son:
+
+\begin{itemize}
+\item
+  Uso y aplicación de las TIC en el ámbito académico y profesional.
+\item
+  Capacidad para innovar y generar nuevas ideas.
+\item
+  Capacidad para evaluar soluciones tecnológicas y elaborar propuestas
+  de proyectos teniendo en cuenta los recursos, las alternativas
+  disponibles y las condiciones de mercado.
+\item
+  Conocer las tecnologías de comunicaciones actuales y emergentes, así
+  como saberlas aplicar convenientemente para diseñar y desarrollar
+  soluciones basadas en sistemas y tecnologías de la información.
+\item
+  Aplicación de las técnicas específicas de ingeniería del software en
+  las diferentes etapas del ciclo de vida de un proyecto.
+\item
+  Capacidad para aplicar las técnicas específicas de tratamiento,
+  almacenamiento y administración de datos.
+\item
+  Capacidad para proponer y evaluar diferentes alternativas tecnológicas
+  para resolver un problema concreto.
+\end{itemize}
+
+\section{Objetivos}\label{objetivos}
+
+La correcta asimilación del Módulo 6 y el resto de Módulos trabajados:
+En esta PEC trabajaremos la generación e interpretación de un modelo de
+basado en reglas de asociación con los recursos de prácticas.
+
+\section{Enunciado}\label{enunciado}
+
+Contextualizad los ejemplos de las siguientes preguntas respecto al
+proyecto que has definido en la PEC1. Si lo deseáis, podéis redefinir o
+afinar el proyecto.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  ¿creéis que las reglas de asociación podrían ser el método finalmente
+  escogido? ¿Os podrían aportar alguna cosa?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ¿Cómo podría ser el modelo resultante?
+  \item
+    Dar un ejemplo de la interpretación que se podría derivar del modelo
+    generado
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Respuesta}\label{respuesta}
+
+Así como ya había Absolutamente los métodos de agregación no son los más
+adecuados para elegir en el caso de baggage-propensity. La justificativa
+es que, conforme hemos comentado en la PEC3, tratase de un modelo de
+aprendizaje supervisado, esto es, conocemos a priori las categorías
+(labels). Mientras tanto, modelos de agregación (que dan como resultado
+modelos descriptivos) buscan obtener una primera aproximación con
+relación al dominio de la información, o sea, son modelos de aprendizaje
+no supervisados.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+First Header & Second Header\tabularnewline
+\midrule
+\endhead
+Content Cell & Content Cell\tabularnewline
+Content Cell & Content Cell\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#my_file <- "lastfm.csv"}
+\CommentTok{#cat("\textbackslash{}n", file = my_file, append = TRUE)}
+\CommentTok{#tdata <- read.transactions(file = my_file, rm.duplicates = FALSE, skip = 1, sep = ",")}
+\CommentTok{#head(tdata)}
+\CommentTok{#class(tdata)}
+\CommentTok{#inspect(head(tdata))}
+\CommentTok{#size(head(tdata)) }
+
+\CommentTok{#frequentItems <- eclat (tdata, parameter = list(supp = 0.07, maxlen = 15))}
+\CommentTok{#inspect(frequentItems)}
+\CommentTok{#itemFrequencyPlot(tdata, topN=15, type="absolute", main="Item Frequency") }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#rules <- apriori (tdata, parameter = list(supp = 0.001, conf = 0.5))}
+\CommentTok{#rules_conf <- sort (rules, by="confidence", decreasing=TRUE)}
+\CommentTok{#inspect(head(rules_conf))}
+\CommentTok{#rules_lift <- sort (rules, by="lift", decreasing=TRUE) }
+\CommentTok{#inspect(head(rules_lift))}
+\NormalTok{lastfm <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"lastfm.csv"}\NormalTok{)}
+\CommentTok{#Distribucion de valores}
+\KeywordTok{head}\NormalTok{(}\KeywordTok{table}\NormalTok{(lastfm}\OperatorTok{$}\NormalTok{artist))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ...and you will know us by the trail of dead 
+##                                          147 
+##                                    [unknown] 
+##                                          553 
+##                                         2pac 
+##                                          341 
+##                                 3 doors down 
+##                                          464 
+##                           30 seconds to mars 
+##                                          492 
+##                                          311 
+##                                          125
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(}\KeywordTok{table}\NormalTok{(lastfm}\OperatorTok{$}\NormalTok{user))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  1  3  4  5  6  7 
+## 16 29 27 11 23 22
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(lastfm}\OperatorTok{$}\NormalTok{sex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##      f      m 
+##  78132 211823
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(}\KeywordTok{table}\NormalTok{(lastfm}\OperatorTok{$}\NormalTok{country))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##    Afghanistan        Albania        Algeria American Samoa        Andorra 
+##             51             49             42             16             33 
+##         Angola 
+##             38
+\end{verbatim}
+
+
+\end{document}

@@ -2,7 +2,7 @@ library(arules)
 my_file <- "lastfm.csv"
 ?read.transactions
 cat("\n", file = my_file, append = TRUE)
-tdata <- read.transactions(file = my_file, rm.duplicates = FALSE, skip = 1, sep = ",")
+tdata <- read.transactions(file = my_file, rm.duplicates = TRUE, skip = 1, sep = ",")
 head(tdata)
 class(tdata)
 inspect(head(tdata))

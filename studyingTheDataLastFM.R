@@ -88,8 +88,13 @@ inspect(head(t_lastfm, 2))
 drops <- c("user", "sex")
 mbc <- split (x = lastfm[ , !(names(lastfm) %in% drops)], f = lastfm$country)
 mbc <- lapply (mbc, unique)
+class(mbc)
 head(mbc)
 mbc <- as (mbc, "transactions")
+
+
+unlist(lapply(mbc, function(x) any(is.na(x))))
+
 
 apriori(mbc)
 apriori(mbc, parameter=list(support=0.01, confidence=0.5))
@@ -105,9 +110,46 @@ apriori(mba)
 image(mba);
 
 apriori(mba)
-apriori(mba, parameter=list(support=0.01, confidence=0.5))
+apriori(tdata)
 
+rules_mba <- apriori(mba, parameter=list(support=0.015, confidence=0.5, ext=TRUE))
+rules_tdata <- apriori(tdata, parameter=list(support=0.015, confidence=0.5))
+
+rules_tdata2 <- apriori(tdata,
+                     parameter = list(target = "artist", support = 0.4))
+inspect(rules_tdata2)
+
+inspect(rules_mba)
+inspect(rules_tdata)
+items(rules_mba)
+items(rules_tdata)
+
+inspect(rules_mba)
+inspect(rules_tdata)
+
+
+frequent_items_mba <- eclat (mba, parameter = list(supp = 0.07, maxlen = 15, ext))
+inspect(frequent_items_mba)
+
+summary(mba)
+summary(tdata)
+
+length(mba)
+length(tdata)
+
+image(mba)
+image(tdata)
+dim(mba)
+dim(tdata)
+inspect(tdata[1:3])
+
+
+itemFrequencyPlot(tdata, support = 0.1, cex.names=0.8)
+itemFrequencyPlot(mba, support = 0.1, cex.names=0.8)
 
 rules <- apriori(mba, parameter=list(support=0.01, confidence=0.5));
 
 rules
+
+library(arulesViz)
+plot(rules_mba)

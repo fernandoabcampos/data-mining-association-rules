@@ -1,0 +1,26 @@
+---
+title: "plants"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(arules)
+```
+
+## R Markdown
+```{r chunck1}
+plants_csv <- read.csv(file = "plants.csv", header = FALSE)
+unlist(lapply(plants_csv, function(x) any(is.na(x))))
+head(plants_csv)
+summary(plants_csv)
+nrow(plants_csv)
+ncol(plants_csv)
+str(plants_csv)
+```
+
+```{r chunck2}
+t_plants <- read.transactions(file = "plants.csv", rm.duplicates = TRUE, skip = 0, sep = ",")
+summary(t_plants)
+inspect(t_plants[1:5])
+```
